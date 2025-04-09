@@ -25,39 +25,39 @@ const CATEGORIES = [
 const TEST_CARDS = [
   {
     id: 'job_test',
-    title: '직업 적성 검사',
-    description: '당신의 성향과 맞는 직업을 알아보세요',
+    title: '일본취업 업종 적합도 검사',
+    description: '당신의 성향과 맞는 업계를 찾아보세요',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=400&auto=format&fit=crop'
   },
   {
     id: 'mbti_test',
-    title: '내 성향은 MBTI',
-    description: '성격은 사람 모여 나는 어떤것 같아요?',
+    title: 'MBTI 검사',
+    description: '나도 몰랐던 내 성격은?',
     image: 'https://images.unsplash.com/photo-1566554273541-37a9ca77b91f?q=80&w=400&auto=format&fit=crop'
   },
   {
     id: 'secret_test',
-    title: '나만의 잠재력 검사 테스트',
-    description: '색깔로 알아보는 당신의 숨겨진 잠재력',
+    title: '일본 사회생활 적합도 검사',
+    description: '가깝고도 먼 일본에서 살아남을수 있을까?',
     image: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=400&auto=format&fit=crop'
   },
   {
     id: 'brain_test',
     title: "뇌구조 테스트",
-    description: "당신의 뇌 구조를 분석하여 어떤 유형인지 알아보세요.",
+    description: "곧 오픈 예정",
     image: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     testFunction: () => console.log("뇌구조 테스트 시작")
   },
   {
     id: 'secret_garden',
     title: '나의 비밀 정원 테스트',
-    description: '스타일과 취향을 알아보는 작사법 테스트',
+    description: '곧 오픈 예정',
     image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=400&auto=format&fit=crop'
   },
   {
     id: 'language_test',
-    title: '국어 어휘력 테스트',
-    description: '우리말 얼마나 아시나요?',
+    title: '일본어 역량 검사',
+    description: '일본어 얼마나 아시나요?',
     image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=400&auto=format&fit=crop'
   }
 ];
