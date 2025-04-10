@@ -293,8 +293,9 @@ body {
   background-color: var(--container-bg);
   border-radius: 10px;
   box-shadow: var(--card-shadow);
-  max-width: 800px;
+  max-width: 900px;
   margin: 40px auto;
+  text-align: left;
 }
 
 .results-page h2 {
@@ -530,4 +531,81 @@ body {
   .brain-test-title {
     font-size: 2rem;
   }
+}
+
+/* 특성 Top 3 섹션 스타일 */
+.top-traits-section {
+  margin-bottom: 30px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  border-left: 5px solid var(--primary-color);
+}
+
+.top-traits-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.trait-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.trait-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trait-card h4 {
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.trait-score {
+  font-weight: normal;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.trait-interpretation {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.appeal-points {
+  background-color: #f0f8ff;
+  border-radius: 6px;
+  padding: 12px 15px;
+}
+
+.appeal-points h5 {
+  color: #2c98db;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.appeal-points ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.appeal-points li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.appeal-points li:last-child {
+  margin-bottom: 0;
 }

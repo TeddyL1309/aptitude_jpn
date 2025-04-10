@@ -746,6 +746,135 @@ function App() {
       };
     });
     
+    // 특성별 점수 계산
+    const traitScores = {};
+    
+    // 모든 업종에서 언급된 특성들을 수집
+    Object.values(INDUSTRY_TRAITS).forEach(industry => {
+      industry.traits.forEach(trait => {
+        if (!traitScores[trait.name]) {
+          traitScores[trait.name] = { score: 0, count: 0 };
+        }
+      });
+    });
+    
+    // 각 질문에 대한 응답을 기반으로 특성 점수 계산
+    Object.keys(answers).forEach(questionId => {
+      const relatedTraits = QUESTION_TRAIT_MAPPING[questionId] || [];
+      const answer = answers[questionId];
+      const question = QUESTIONS.find(q => q.id === questionId);
+      
+      if (question && answer) {
+        const normalizedScore = normalizeResponse(question, answer);
+        
+        relatedTraits.forEach(trait => {
+          if (traitScores[trait]) {
+            traitScores[trait].score += normalizedScore;
+            traitScores[trait].count += 1;
+          }
+        });
+      }
+    });
+    
+    // 평균 특성 점수 계산 및 정렬
+    const sortedTraits = Object.keys(traitScores)
+      .map(trait => ({
+        name: trait,
+        score: traitScores[trait].count > 0 
+          ? Math.round((traitScores[trait].score / traitScores[trait].count) * 20) 
+          : 0
+      }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3); // 상위 3개 특성만 선택
+    
+    // 특성별 해석 및 어필 포인트
+    const traitInterpretations = {
+      '분석적이고 정확한': {
+        interpretation: '복잡한 정보를 체계적으로 분석하고 정확한 결론을 도출하는 능력이 뛰어납니다.',
+        appealPoints: [
+          '데이터 기반 의사결정을 통해 프로젝트의 성공률을 높인 경험을 강조하세요.',
+          '복잡한 문제를 체계적으로 분석하여 효율적인 해결책을 찾은 사례를 언급하세요.'
+        ]
+      },
+      '논리적이고 분석적인': {
+        interpretation: '논리적 사고를 바탕으로 문제의 원인과 해결책을 명확하게 파악하는 능력이 있습니다.',
+        appealPoints: [
+          '논리적 분석을 통해 비즈니스 프로세스를 개선한 경험을 이야기하세요.',
+          '데이터 분석을 통해 중요한 인사이트를 도출하고 적용한 사례를 제시하세요.'
+        ]
+      },
+      '대인관계가 원활하고 신뢰감 있는': {
+        interpretation: '다양한 사람들과 효과적으로 소통하고 긍정적인 관계를 구축하는 능력이 있습니다.',
+        appealPoints: [
+          '팀 내 갈등을 조율하고 협력적인 환경을 조성한 경험을 강조하세요.',
+          '다양한 이해관계자들과 신뢰 관계를 구축하여 프로젝트를 성공시킨 사례를 공유하세요.'
+        ]
+      },
+      '창의적이고 독창적인': {
+        interpretation: '기존 틀에서 벗어나 새롭고 혁신적인 아이디어를 제시하는 능력이 있습니다.',
+        appealPoints: [
+          '창의적인 접근법으로 기존 문제를 혁신적으로 해결한 경험을 강조하세요.',
+          '독창적인 아이디어를 통해 프로젝트나 제품의 가치를 높인 사례를 설명하세요.'
+        ]
+      },
+      '기술적으로 유능하고 문제 해결에 능한': {
+        interpretation: '기술적 지식을 바탕으로 실질적인 문제를 효과적으로 해결하는 능력이 뛰어납니다.',
+        appealPoints: [
+          '기술적 난제를 해결하여 업무 효율성을 크게 향상시킨 경험을 이야기하세요.',
+          '복잡한 기술 문제를 단계적으로 해결한 과정과 결과를 구체적으로 설명하세요.'
+        ]
+      },
+      '체계적이고 구조적 사고가 가능한': {
+        interpretation: '복잡한 상황에서도 체계적으로 접근하여 구조화된 해결책을 제시할 수 있습니다.',
+        appealPoints: [
+          '복잡한 프로젝트를 체계적으로 구조화하여 성공적으로 관리한 경험을 강조하세요.',
+          '구조적 사고를 통해 비즈니스 프로세스를 최적화한 사례를 제시하세요.'
+        ]
+      },
+      '효율적이고 조직력 있는': {
+        interpretation: '제한된 자원에서 최대의 결과를 도출할 수 있는 효율성과, 업무를 체계적으로 관리하는 능력이 있습니다.',
+        appealPoints: [
+          '시간과 자원을 효율적으로 관리하여 프로젝트를 기한 내에 완료한 경험을 이야기하세요.',
+          '조직력을 발휘해 복잡한 업무를 체계적으로 처리하여 성과를 높인 사례를 공유하세요.'
+        ]
+      },
+      '고객 중심적이고 서비스 지향적인': {
+        interpretation: '고객의 니즈와 기대를 이해하고 이를 충족시키기 위해 노력하는 자세가 돋보입니다.',
+        appealPoints: [
+          '고객 만족도를 향상시키기 위한 이니셔티브를 주도한 경험을 강조하세요.',
+          '고객 피드백을 적극적으로 수용하여 서비스나 제품을 개선한 사례를 설명하세요.'
+        ]
+      },
+      '안정적이고 신뢰할 수 있는': {
+        interpretation: '어떤 상황에서도 일관되게 책임감 있게 업무를 수행하며 주변에 신뢰를 주는 특성이 있습니다.',
+        appealPoints: [
+          '어려운 상황에서도 안정적으로 성과를 유지한 경험을 이야기하세요.',
+          '책임감 있는 태도로 팀원들의 신뢰를 얻고 리더십을 발휘한 사례를 공유하세요.'
+        ]
+      },
+      '트렌드에 민감하고 창의적인': {
+        interpretation: '최신 트렌드를 빠르게 파악하고 이를 창의적으로 활용하는 능력이 있습니다.',
+        appealPoints: [
+          '시장 트렌드를 분석하고 이를 비즈니스 전략에 성공적으로 적용한 경험을 강조하세요.',
+          '트렌드를 창의적으로 해석하여 새로운 기회를 발굴한 사례를 설명하세요.'
+        ]
+      },
+      '적응력 있는': {
+        interpretation: '새로운 환경과 변화하는 상황에 빠르게 적응하고 유연하게 대처하는 능력이 있습니다.',
+        appealPoints: [
+          '급변하는 시장 환경에 신속하게 적응하여 비즈니스 성과를 유지한 경험을 이야기하세요.',
+          '예상치 못한 문제에 유연하게 대처하고 위기를 기회로 전환한 사례를 공유하세요.'
+        ]
+      },
+      '체계적이고 효율적인': {
+        interpretation: '업무를 체계적으로 계획하고 효율적으로 실행하는 능력이 뛰어납니다.',
+        appealPoints: [
+          '복잡한 프로젝트를 체계적으로 관리하여 시간과 자원을 절약한 경험을 강조하세요.',
+          '업무 프로세스를 효율화하여 팀의 생산성을 크게 향상시킨 사례를 설명하세요.'
+        ]
+      }
+    };
+    
     // 최적 직업 찾기
     const topIndustry = sortedIndustryData[0]?.name;
     const topIndustryInfo = topIndustry ? INDUSTRY_TRAITS[topIndustry] : null;
@@ -753,6 +882,36 @@ function App() {
     return (
       <div className="results-page">
         <h2>당신의 직업 적성 결과</h2>
+        
+        <div className="top-traits-section">
+          <h3>가장 높게 나온 특성 Top 3</h3>
+          <div className="top-traits-container">
+            {sortedTraits.map((trait, index) => {
+              const interpretation = traitInterpretations[trait.name] || {
+                interpretation: '이 특성은 다양한 업무 환경에서 가치 있게 활용될 수 있습니다.',
+                appealPoints: [
+                  '이 특성을 활용하여 업무 성과를 향상시킨 구체적인 경험을 강조하세요.',
+                  '이 특성이 특정 직무나 프로젝트에서 어떻게 도움이 되었는지 설명하세요.'
+                ]
+              };
+              
+              return (
+                <div key={index} className="trait-card">
+                  <h4>{index + 1}. {trait.name} <span className="trait-score">({trait.score}점)</span></h4>
+                  <p className="trait-interpretation">{interpretation.interpretation}</p>
+                  <div className="appeal-points">
+                    <h5>어필 포인트 (엔트리시트 작성, 면접 시)</h5>
+                    <ul>
+                      {interpretation.appealPoints.map((point, i) => (
+                        <li key={i}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         
         {topIndustryInfo && (
           <div className="top-result">
