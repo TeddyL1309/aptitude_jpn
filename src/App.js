@@ -600,7 +600,7 @@ function App() {
     const currentCategoryQuestions = QUESTIONS.filter(q => q.category === CATEGORIES[currentStep].id);
     
     // 현재 질문이 없는 경우 처리
-    if (currentCategoryQuestions.length === 0 || currentStep >= currentCategoryQuestions.length) {
+    if (currentCategoryQuestions.length === 0) {
       return (
         <div className="survey-page">
           <h2>질문이 없습니다</h2>
@@ -613,41 +613,41 @@ function App() {
       );
     }
     
-    const currentQuestion = currentCategoryQuestions[currentStep];
-    
     return (
       <div className="survey-page">
         <h2>{CATEGORIES[currentStep].icon} {CATEGORIES[currentStep].name}</h2>
         <div className="questions">
-          <div className="question">
-            <p>{currentQuestion.text}</p>
-            
-            {currentQuestion.type === 'likert' ? (
-              <div className="likert-scale">
-                {[1, 2, 3, 4, 5].map(value => (
-                  <button 
-                    key={value} 
-                    onClick={() => handleAnswer(currentQuestion.id, value)}
-                    className={answers[currentQuestion.id] === value ? 'selected' : ''}
-                  >
-                    {value}
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <div className="choice-options">
-                {currentQuestion.options.map((option, index) => (
-                  <button 
-                    key={option.value}
-                    onClick={() => handleAnswer(currentQuestion.id, option.value)}
-                    className={answers[currentQuestion.id] === option.value ? 'selected' : ''}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+          {currentCategoryQuestions.map(question => (
+            <div key={question.id} className="question">
+              <p>{question.text}</p>
+              
+              {question.type === 'likert' ? (
+                <div className="likert-scale">
+                  {[1, 2, 3, 4, 5].map(value => (
+                    <button 
+                      key={value} 
+                      onClick={() => handleAnswer(question.id, value)}
+                      className={answers[question.id] === value ? 'selected' : ''}
+                    >
+                      {value}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="choice-options">
+                  {question.options.map((option) => (
+                    <button 
+                      key={option.value}
+                      onClick={() => handleAnswer(question.id, option.value)}
+                      className={answers[question.id] === option.value ? 'selected' : ''}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
         
         <div className="navigation">
@@ -662,21 +662,24 @@ function App() {
             이전
           </button>
           <button 
-            disabled={!answers[currentQuestion.id]}
+            disabled={currentCategoryQuestions.some(q => !answers[q.id])}
             onClick={() => {
-              if (!answers[currentQuestion.id]) {
-                alert('질문에 답변해주세요.');
+              // 현재 카테고리의 모든 질문에 답변했는지 확인
+              const allAnswered = currentCategoryQuestions.every(q => answers[q.id]);
+              
+              if (!allAnswered) {
+                alert('모든 질문에 답변해주세요.');
                 return;
               }
               
-              if (currentStep < currentCategoryQuestions.length - 1) {
+              if (currentStep < CATEGORIES.length - 1) {
                 setCurrentStep(currentStep + 1);
               } else {
                 setAppState(APP_STATES.RESULTS);
               }
             }}
           >
-            {currentStep < currentCategoryQuestions.length - 1 ? '다음' : '결과 보기'}
+            {currentStep < CATEGORIES.length - 1 ? '다음' : '결과 보기'}
           </button>
         </div>
       </div>
