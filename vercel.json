@@ -1,12 +1,7 @@
 {
-  "name": "aptitude_jpn",
   "framework": "create-react-app",
   "buildCommand": "npm run build",
   "outputDirectory": "build",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TeddyL1309/aptitude_jpn.git"
-  },
   "routes": [
     {
       "src": "/static/(.*)",
