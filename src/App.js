@@ -8,7 +8,6 @@ const APP_STATES = {
   START: 'START',
   SURVEY: 'SURVEY',
   RESULTS: 'RESULTS',
-  BRAIN_TEST: 'BRAIN_TEST',
   PROCESSING: 'PROCESSING'
 };
 
@@ -40,13 +39,6 @@ const TEST_CARDS = [
     title: '일본어 수준 검사',
     description: '원활한 일본어 소통이 가능할지 확인해보세요',
     image: '/images/03.png'
-  },
-  {
-    id: 'brain_test',
-    title: '뇌구조 테스트',
-    description: '당신의 뇌 구조를 분석하여 어떤 유형인지 알아보세요',
-    image: '/images/brain_test.png',
-    testFunction: () => console.log('뇌구조 테스트 시작!')
   }
 ];
 
@@ -568,12 +560,7 @@ function App() {
             key={card.id} 
             className="test-card" 
             onClick={() => {
-              if (card.id === 'brain_test') {
-                setAppState(APP_STATES.BRAIN_TEST);
-                if (card.testFunction) card.testFunction();
-              } else {
-                setAppState(APP_STATES.START);
-              }
+              setAppState(APP_STATES.START);
             }}
           >
             <div 
@@ -1406,64 +1393,6 @@ function App() {
     );
   };
   
-  // 뇌구조 테스트 페이지
-  const renderBrainTestPage = () => {
-    const brainTypes = [
-      {
-        id: 'analytical',
-        title: '분석적 뇌',
-        description: '논리적 사고와 문제 해결에 뛰어난 뇌 구조입니다. 복잡한 문제를 체계적으로 분석하고 해결책을 찾는 능력이 뛰어납니다.',
-        image: '/images/brain_analytical.png'
-      },
-      {
-        id: 'creative',
-        title: '창의적 뇌',
-        description: '창의적 발상과 예술적 감각이 뛰어난 뇌 구조입니다. 새로운 아이디어를 생각해내고 혁신적인 접근법을 찾는 능력이 뛰어납니다.',
-        image: '/images/brain_creative.png'
-      },
-      {
-        id: 'social',
-        title: '사회적 뇌',
-        description: '대인관계와 감정 이해에 뛰어난 뇌 구조입니다. 타인의 감정을 이해하고 효과적으로 소통하는 능력이 뛰어납니다.',
-        image: '/images/brain_social.png'
-      },
-      {
-        id: 'executive',
-        title: '실행적 뇌',
-        description: '계획 수립과 실행에 뛰어난 뇌 구조입니다. 목표를 세우고 이를 달성하기 위한 단계를 체계적으로 실행하는 능력이 뛰어납니다.',
-        image: '/images/brain_executive.png'
-      }
-    ];
-
-    const testFunction = () => {
-      console.log('뇌구조 테스트 시작!');
-    };
-
-    return (
-      <div className="brain-test-page">
-        <h2 className="brain-test-title">뇌구조 테스트</h2>
-        <p className="brain-test-description">당신의 뇌 구조를 분석하여 어떤 유형인지 알아보세요.</p>
-        
-        <div className="brain-types-grid">
-          {brainTypes.map(brainType => (
-            <div key={brainType.id} className="brain-type-card">
-              <div className="brain-type-image" style={{ backgroundImage: `url(${brainType.image})` }}></div>
-              <div className="brain-type-content">
-                <h3>{brainType.title}</h3>
-                <p>{brainType.description}</p>
-                <button className="brain-test-button" onClick={testFunction}>테스트 시작하기</button>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <button className="back-button" onClick={() => setAppState(APP_STATES.HOME)}>
-          홈으로 돌아가기
-        </button>
-      </div>
-    );
-  };
-  
   return (
     <div className="App">
       {renderHeader()}
@@ -1472,7 +1401,6 @@ function App() {
       {appState === APP_STATES.START && renderStartPage()}
       {appState === APP_STATES.SURVEY && renderSurveyPage()}
       {appState === APP_STATES.RESULTS && renderResultsPage()}
-      {appState === APP_STATES.BRAIN_TEST && renderBrainTestPage()}
     </div>
   );
 }
