@@ -79,7 +79,7 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   position: relative;
-  height: 280px;
+  height: 350px;
   display: flex;
   flex-direction: column;
 }
@@ -91,21 +91,20 @@ body {
 
 .test-card-image {
   width: 100%;
-  height: 180px;
-  background-size: contain;
+  height: 250px;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
   left: 0;
   background-color: #FFF8E5;
-  padding: 10px;
 }
 
 .test-card-content {
-  padding: 15px;
+  padding: 20px 15px;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   color: white;
   position: absolute;
   bottom: 0;
@@ -115,16 +114,17 @@ body {
 }
 
 .test-card-title {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin: 0;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .test-card-description {
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin: 0;
-  opacity: 0.9;
+  opacity: 0.95;
+  line-height: 1.4;
 }
 
 /* 시작 페이지 스타일 */
@@ -415,6 +415,14 @@ body {
 @media (max-width: 768px) {
   .test-grid {
     grid-template-columns: repeat(1, 1fr);
+  }
+  
+  .test-card {
+    height: 380px;
+  }
+  
+  .test-card-image {
+    height: 280px;
   }
   
   .start-page h1 {
