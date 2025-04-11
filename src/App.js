@@ -31,13 +31,13 @@ const TEST_CARDS = [
   {
     id: 'mbti_test',
     title: '일본 비즈니스 적응력 검사',
-    description: '가깝고도 먼 나라 일본 비즈니스와의 매칭도를 알아보세요',
+    description: '일본 비즈니스 문화에 잘 맞는지 알아보세요',
     image: '/images/02.png'
   },
   {
     id: 'japan_life_test',
-    title: '일본어 수준 검사',
-    description: '원활한 일본어 소통이 가능할지 확인해보세요',
+    title: '일본어 능력 검사',
+    description: '당신의 일본어 구사 수준을 확인해보세요',
     image: '/images/03.png'
   }
 ];
@@ -99,7 +99,7 @@ const INDUSTRY_TRAITS = {
     description: '글로벌 시장에 대한 인사이트, 체계성과 전략성과 다양한 환경 적응력이 종합상사 업무와 잘 어울립니다.',
     overview: '일본 종합상사는 무역, 투자, 프로젝트 개발 등 다양한 비즈니스를 글로벌 규모로 운영하는 대기업입니다. 다양한 산업 분야와 지역에 걸친 네트워크를 통해 글로벌 비즈니스를 조정하며, 국제적 감각을 가진 인재를 중요시합니다.'
   },
-  '제조업': {
+  '제조업・에너지': {
     traits: [
       { name: '실용적이고 기술적으로 정확한', weight: 5 },
       { name: '세심하고 품질 지향적인', weight: 4 },
@@ -120,17 +120,6 @@ const INDUSTRY_TRAITS = {
     ],
     description: '체계적인 작업 접근법이 식품 산업의 품질 관리와 관련이 있습니다.',
     overview: '일본의 식품 산업은 전통 식품부터 혁신적인 신제품까지 다양한 분야를 아우르며, 품질과 안전성에 대한 높은 기준을 가지고 있습니다. 국제적 시장 확장과 새로운 제품 개발을 위해 글로벌 시각을 가진 전문가를 필요로 합니다.'
-  },
-  '에너지': {
-    traits: [
-      { name: '전략적이고 계획적인', weight: 5 },
-      { name: '규정에 정통하고 책임감 있는', weight: 4 },
-      { name: '환경 의식이 높고 미래 지향적인', weight: 3 },
-      { name: '기술적으로 능숙하고 정확한', weight: 2 },
-      { name: '분석적이고 환경에 민감한', weight: 1 }
-    ],
-    description: '계획성과 책임감이 돋보이는 당신은 에너지 섹터와 부분적으로 일치합니다.',
-    overview: '일본의 에너지 산업은 전통적인 발전 방식에서 재생 에너지로의 전환을 추진하고 있습니다. 후쿠시마 사태 이후 안전성과 지속가능성에 중점을 두며, 특히 재생 에너지 기술과 에너지 효율성 분야에서 혁신을 추구하고 있습니다.'
   },
   '유통・소매': {
     traits: [
@@ -154,18 +143,7 @@ const INDUSTRY_TRAITS = {
     description: '사람을 잘 이해하며 서비스 정신이 투철하고 세심한 당신은 관광/인재서비스 분야에 적합성을 보입니다.',
     overview: '일본의 관광 및 인재 서비스 산업은 코로나19 이후 회복 중이며, 외국인 관광객 유치와 글로벌 인재 채용에 중점을 두고 있습니다. 언어 능력과 문화적 이해를 겸비한 전문가가 필요하며, 특히 인바운드 관광과 해외 인재 채용 분야에서 기회가 증가하고 있습니다.'
   },
-  '엔터테인먼트・레저': {
-    traits: [
-      { name: '고객 지향적이고 서비스 지향적인', weight: 5 },
-      { name: '트렌드에 민감하고 창의적인', weight: 4 },
-      { name: '창의적이고 예술적인', weight: 3 },
-      { name: '전략적이고 시장 감각이 뛰어난', weight: 2 },
-      { name: '국제적 감각이 있고 협상에 능한', weight: 1 }
-    ],
-    description: '고객 지향적이고 트렌드에 민감하며 창의적인 당신은 엔터테인먼트 및 레저 분야와 높은 적합성을 보입니다.',
-    overview: '일본의 엔터테인먼트 및 레저 산업은 애니메이션, 게임, 음악, 영화부터 테마파크까지 다양한 분야를 포함합니다. 국제적으로 인정받는 콘텐츠를 제작하며, 특히 디지털 엔터테인먼트와 글로벌 콘텐츠 유통 분야에서 글로벌 인재를 찾고 있습니다.'
-  },
-  '광고・미디어': {
+  '광고・미디어・엔터': {
     traits: [
       { name: '디지털에 정통하고 트렌드를 선도하는', weight: 5 },
       { name: '사교적이고 관계 구축에 능한', weight: 4 },
@@ -181,35 +159,35 @@ const INDUSTRY_TRAITS = {
 // 각 질문이 어떤 특성과 관련되는지 매핑
 const QUESTION_TRAIT_MAPPING = {
   // 작업 스타일 관련 질문
-  'ws1': ['분석적이고 정확한', '논리적이고 분석적인', '데이터 중심적이고 객관적인'],  // 분석적 사고
+  'ws1': ['고객 중심적이고 서비스 지향적인', '대인관계가 원활하고 사람을 잘 이해하는', '사교적이고 관계 구축에 능한'],  // 분석적 사고에서 고객 중심으로 변경
   'ws2': ['창의적이고 독창적인', '혁신적이고 창의적인', '창의적이고 예술적인'],         // 창의성
   'ws3': ['체계적이고 구조적 사고가 가능한', '실용적이고 기술적으로 정확한', '효율적이고 계획적인'], // 작업 방식
-  'ws4': ['세심하고 정확한', '꼼꼼하고 규정을 준수하는', '세심하고 품질 지향적인'], // 세부사항 주의력
-  'ws5': ['전략적이고 분석적인', '체계적이고 전략적인', '효율적이고 계획적인'], // 역할 선호도
+  'ws4': ['세심하고 정확한', '서비스 정신이 투철하고 세심한', '고객 지향적이고 공감 능력이 높은'], // 세부사항 주의력에서 서비스 정신으로 변경
+  'ws5': ['고객 중심적이고 서비스 지향적인', '대인관계가 원활하고 신뢰감 있는', '고객 지향적이고 공감 능력이 높은'], // 전략적 사고에서 고객 중심으로 변경
   // 커뮤니케이션 방식 질문
-  'cm1': ['다국어에 능통하고 국제적인', '다국어에 유창하고 친절한', '국제적 감각이 있고 협상에 능한'], // 언어 능력
+  'cm1': ['다국어에 능통하고 국제적인', '다국어에 유창하고 친절한', '국제적 감각이 있고 협상에 능한_1'], // 언어 능력
   'cm2': ['대인관계가 원활하고 신뢰감 있는', '사교적이고 관계 구축에 능한', '고객 중심적이고 서비스 지향적인'], // 커뮤니케이션 스타일
-  'cm3': ['명료하고 설득력 있는', '전략적이고 분석적인', '전문적이고 박식한'], // 설명 능력
+  'cm3': ['서비스 정신이 투철하고 세심한', '고객 지향적이고 공감 능력이 높은', '대인관계가 원활하고 사람을 잘 이해하는'], // 설명 능력에서 서비스 정신으로 변경
   'cm4': ['대인관계가 원활하고 신뢰감 있는', '조직적이고 책임감 있는', '대인관계가 원활하고 사람을 잘 이해하는'], // 갈등 해결
   'cm5': ['다국어에 능통하고 국제적인', '국제적 감각이 있고 적응력 있는', '사교적이고 관계 구축에 능한'], // 다문화 소통
   // 문제 해결 접근법 질문
-  'ps1': ['분석적이고 정확한', '데이터 중심적이고 객관적인', '논리적이고 분석적인'], // 문제 해결 접근법
-  'ps2': ['체계적이고 구조적 사고가 가능한', '신중하고 리스크에 민감한', '분석적이고 환경에 민감한'], // 체계적 분석
+  'ps1': ['고객 중심적이고 서비스 지향적인', '서비스 정신이 투철하고 세심한', '대인관계가 원활하고 사람을 잘 이해하는'], // 분석적 사고에서 고객 중심으로 변경
+  'ps2': ['고객 지향적이고 공감 능력이 높은', '대인관계가 원활하고 신뢰감 있는', '서비스 정신이 투철하고 세심한'], // 체계적 분석에서 고객 지향으로 변경
   'ps3': ['창의적이고 독창적인', '혁신적이고 창의적인', '실용적이고 솔루션 지향적인'], // 창의적 문제 해결
-  'ps4': ['분석적이고 정확한', '신중하고 리스크에 민감한', '데이터 중심적이고 객관적인'], // 의사결정 방식
-  'ps5': ['예리하고 판단력이 뛰어난', '전략적이고 분석적인', '창의적이고 독창적인'], // 다양한 관점
+  'ps4': ['고객 중심적이고 서비스 지향적인', '서비스 정신이 투철하고 세심한', '대인관계가 원활하고 사람을 잘 이해하는'], // 분석적 사고에서 고객 중심으로 변경
+  'ps5': ['고객 지향적이고 공감 능력이 높은', '시장 감각이 뛰어나고 창의적인', '사교적이고 관계 구축에 능한'], // 전략적 사고에서 고객 지향으로 변경
   // 환경 선호도 질문
   'en1': ['안정적이고 신뢰할 수 있는', '꼼꼼하고 규정을 준수하는', '효율적이고 조직력 있는'], // 업무 환경 선호
   'en2': ['체계적이고 구조적 사고가 가능한', '꼼꼼하고 규정을 준수하는', '세심하고 정확한'], // 규칙과 구조
   'en3': ['적응력 있는', '국제적 감각이 있고 적응력 있는', '트렌드에 민감하고 창의적인'], // 적응력
-  'en4': ['효율적이고 조직력 있는', '협력적이고 팀워크에 능한', '대인관계가 원활하고 신뢰감 있는'], // 작업 방식
+  'en4': ['고객 지향적이고 공감 능력이 높은', '서비스 정신이 투철하고 세심한', '대인관계가 원활하고 신뢰감 있는'], // 작업 방식에서 고객 지향으로 변경
   'en5': ['효율적이고 조직력 있는', '적응력 있는', '다재다능하고 유연한'], // 멀티태스킹
   // 가치 및 동기 질문
   'va1': ['고객 중심적이고 서비스 지향적인', '서비스 정신이 투철하고 세심한', '대인관계가 원활하고 사람을 잘 이해하는'], // 서비스 지향
-  'va2': ['개선 지향적이고 끊임없이 발전하는', '전문적이고 박식한', '기술에 능통하고 트렌드에 민감한'], // 성장 지향
+  'va2': ['개선 지향적이고 끊임없이 발전하는', '전문적이고 박식한', '고객 지향적이고 공감 능력이 높은'], // 성장 지향에서 일부 고객 지향으로 변경
   'va3': ['안정적이고 신뢰할 수 있는', '도전적이고 성취 지향적인', '창의적이고 독창적인'], // 핵심 가치
   'va4': ['혁신적이고 창의적인', '창의적이고 독창적인', '창의적이고 추진력 있는'], // 혁신 주도
-  'va5': ['고객 중심적이고 서비스 지향적인', '도전적이고 성취 지향적인', '전략적이고 시장 감각이 뛰어난'] // 직업 동기
+  'va5': ['고객 중심적이고 서비스 지향적인', '도전적이고 성취 지향적인', '고객 지향적이고 공감 능력이 높은'] // 직업 동기에서 일부 고객 지향으로 변경
 };
 
 // 설문 질문 데이터
@@ -477,6 +455,380 @@ const normalizeResponse = (question, answer) => {
   return 3; // 기본값
 };
 
+// 일본 비즈니스 적응력 검사 데이터
+const JAPAN_BUSINESS_TEST = {
+  introduction: "일본 비즈니스 문화 적응력 진단 평가",
+  guidance: [
+    "각 문항은 일본 비즈니스 환경에서 마주할 수 있는 복잡한 상황을 제시합니다.",
+    "각 상황에서 본인이 취할 것 같은 행동을 4개 선택지 중에서 고르세요.",
+    "모든 선택지는 정답이 없으며 나름의 장단점이 있으므로 신중하게 판단하세요.",
+    "본인의 주관에 맞춰서 솔직하게 선택해 주세요."
+  ],
+  questions: [
+    {
+      id: "jb1",
+      text: "당신은 일본 회사에 입사한 지 6개월 된 직원입니다. 중요한 프로젝트에 대한 회의 중, 당신의 직속 상사가 아닌 다른 부서의 과장(課長)이 프로젝트 방향에 대해 당신이 볼 때 비효율적인 접근법을 제안했습니다. 이 과장은 회사에서 평판이 좋고 당신보다 10년 이상 경력이 많습니다. 당신은 더 효과적인 방법을 알고 있다고 확신합니다. 어떻게 대응하겠습니까?",
+      options: [
+        { value: "A", label: "회의 중에 '제 경험에 비추어 볼 때, 이런 접근 방식이 더 효율적일 것 같습니다'라고 말하며 자신의 의견을 명확하게 제시한다." },
+        { value: "B", label: "회의가 끝난 후 자신의 직속 상사에게 먼저 자신의 생각을 설명하고, 상사의 조언에 따라 과장에게 개인적으로 대안을 제안하거나 다음 회의에서 의견을 내도록 한다." },
+        { value: "C", label: "회의 중 '질문이 있습니다'라고 말한 후, 과장의 방식에 대해 더 자세히 물어보면서 간접적으로 자신의 대안을 암시한다." },
+        { value: "D", label: "회의 직후 해당 과장을 개인적으로 찾아가 '다른 관점에서 생각해 보았는데, 이런 방법도 고려해보시면 어떨까요?'라고 조심스럽게 제안한다." }
+      ],
+      category: "hierarchy",
+      explanation: {
+        title: "계층 구조와 연공서열",
+        answers: {
+          "A": { score: 2, description: "최악의 선택" },
+          "B": { score: 5, description: "최선" },
+          "C": { score: 3, description: "그닥 좋지 않은 선택" },
+          "D": { score: 4, description: "차선" }
+        },
+        detail: "일본의 계층 구조에서는 직접적인 의견 대립을 피하는 것이 중요합니다. 직속 상사를 통해 의견을 전달하는 것이 가장 적절한 채널입니다. 개인적으로 과장에게 접근하는 것도 가능하지만, 상사를 통하지 않으면 조직 위계를 무시하는 행동으로 보일 수 있습니다."
+      }
+    },
+    {
+      id: "jb2",
+      text: "당신은 국제 마케팅 부서에서 일하고 있으며, 해외 시장을 위한 새로운 판촉 전략을 구상했습니다. 이 아이디어는 회사의 전통적인 접근 방식과는 다소 다르지만, 효과가 있을 것이라고 확신합니다. 이 아이디어를 어떻게 추진하겠습니까?",
+      options: [
+        { value: "A", label: "정기 부서 회의에서 준비한 자료를 바탕으로 자신의 아이디어를 발표하고, 자신의 해외 경험을 강조하며 즉각적인 피드백을 요청한다." },
+        { value: "B", label: "영향력 있는 선임 동료 몇 명에게 먼저 비공식적으로 아이디어를 설명하고 지지를 얻은 후, 상사에게 개인적으로 제안하고, 공식 제안서를 작성한다." },
+        { value: "C", label: "상사에게 이메일로 아이디어의 개요를 보내고 의견을 구한 후, 긍정적인 반응이 있으면 부서 회의에서 발표할 수 있도록 안건에 포함시켜 달라고 요청한다." },
+        { value: "D", label: "먼저 공식 제안서를 작성하여 링기(稟議) 절차를 시작하고, 관련 부서의 승인을 얻을 수 있도록 문서를 회람시킨다." }
+      ],
+      category: "decision_making",
+      explanation: {
+        title: "의사결정 프로세스",
+        answers: {
+          "A": { score: 2, description: "최악의 선택" },
+          "B": { score: 5, description: "최선" },
+          "C": { score: 4, description: "차선" },
+          "D": { score: 3, description: "그닥 좋지 않은 선택" }
+        },
+        detail: "네마와시(根回し)를 통한 사전 합의 형성이 중요합니다. 특히 전통적인 방식과 다른 새로운 아이디어일수록 공식 절차 전에 비공식적인 지지를 얻는 것이 성공 확률을 높입니다."
+      }
+    },
+    {
+      id: "jb3",
+      text: "당신은 일본 클라이언트와 새로운 프로젝트에 대해 논의 중입니다. 제안서를 보낸 후 클라이언트로부터 '흥미로운 제안이네요. 검토해 보겠습니다만, 일정과 예산 면에서 조금 재고가 필요할 것 같습니다(興味深いご提案ですね。検討させていただきますが、スケジュールと予算面で少し考慮が必要かもしれません)'라는 답변을 받았습니다. 어떻게 해석하고 대응하겠습니까?",
+      options: [
+        { value: "A", label: "긍정적인 반응으로 이해하고, 추가 정보와 구체적인 일정 및 예산 조정안을 포함한 상세 제안서를 준비하여 보낸다." },
+        { value: "B", label: "이것을 부드러운 거절로 해석하고, '다른 접근 방식에 관심이 있으신지' 물어보며 완전히 새로운 제안을 준비한다." },
+        { value: "C", label: "'어떤 부분이 구체적으로 우려되시는지 알려주시면, 그에 맞게 조정할 수 있습니다'라고 회신하여 더 명확한 피드백을 요청한다." },
+        { value: "D", label: "일주일 정도 기다린 후 '제안서에 대한 검토는 어떻게 진행되고 있습니까?'라고 후속 이메일을 보낸다." }
+      ],
+      category: "communication",
+      explanation: {
+        title: "독특한 커뮤니케이션 방식",
+        answers: {
+          "A": { score: 2, description: "최악의 선택" },
+          "B": { score: 4, description: "차선" },
+          "C": { score: 5, description: "최선" },
+          "D": { score: 3, description: "그닥 좋지 않은 선택" }
+        },
+        detail: "일본식 커뮤니케이션에서 '재고가 필요하다'는 표현은 거절이나 큰 우려를 의미할 수 있습니다. 그러나 완전한 거절로 해석하기보다는, 구체적인 우려 사항을 파악하여 대응하는 것이 효과적입니다."
+      }
+    },
+    {
+      id: "jb4",
+      text: "당신은 일본 기업과 중요한 비즈니스 협상을 앞두고 있습니다. 첫 미팅 이후, 일본 측 담당자가 정식 계약 논의 전에 저녁 식사, 골프, 회사 견학 등 여러 비공식적인 만남을 제안했습니다. 협상 일정이 빠듯한 상황에서 어떻게 대응하겠습니까?",
+      options: [
+        { value: "A", label: "모든 제안을 수락하고 이러한 비공식적 만남에 시간을 충분히 할애하되, 각 자리에서 자연스럽게 비즈니스 관련 대화도 조금씩 섞어 논의를 진전시킨다." },
+        { value: "B", label: "'먼저 계약 조건에 대해 합의한 후, 그것을 축하하는 의미로 함께 시간을 보내면 어떨까요?'라고 정중히 제안하며 비즈니스 논의를 우선시한다." },
+        { value: "C", label: "식사와 회사 견학은 수락하되 골프는 시간 제약을 이유로 정중히 사양하고, 비공식 만남과 공식 협상을 병행하여 진행한다." },
+        { value: "D", label: "모든 제안을 수락하고 이 기회를 통해 비즈니스 대화는 최소화하면서 개인적 관계 형성과 일본 문화 이해에 집중한다." }
+      ],
+      category: "relationship",
+      explanation: {
+        title: "관계 중심 비즈니스",
+        answers: {
+          "A": { score: 5, description: "최선" },
+          "B": { score: 2, description: "최악의 선택" },
+          "C": { score: 4, description: "차선" },
+          "D": { score: 3, description: "그닥 좋지 않은 선택" }
+        },
+        detail: "일본 비즈니스에서는 개인적 관계 형성이 계약보다 선행됩니다. 비공식 만남을 통해 신뢰를 구축하면서도 자연스럽게 비즈니스 논의를 진전시키는 균형 잡힌 접근이 효과적입니다."
+      }
+    },
+    {
+      id: "jb5",
+      text: "당신이 일본 본사에 새로운 마케팅 전략을 제안한 후, 부장(部長)이 '매우 독창적인 아이디어입니다. 참고하겠습니다(参考にさせていただきます). 일본 시장의 특성을 잘 반영했군요'라고 말했습니다. 다른 동료들은 아무 말도 하지 않고 미소만 짓고 있습니다. 이 반응을 어떻게 해석하고 다음 단계로 무엇을 하겠습니까?",
+      options: [
+        { value: "A", label: "긍정적인 피드백으로 이해하고, 곧바로 세부 실행 계획을 작성하여 공유한다." },
+        { value: "B", label: "일본 시장 특성에 대한 언급이 있었으므로, 제안을 수정하여 더 현지화된 버전을 준비한다." },
+        { value: "C", label: "실질적으로는 거절이라고 판단하고, 다른 접근법을 모색하되 이 아이디어는 더 이상 언급하지 않는다." },
+        { value: "D", label: "애매한 반응으로 해석하고, 개인적으로 일본인 동료에게 '부장님의 실제 의견이 어떤 것 같았나요?'라고 비공식적으로 물어본다." }
+      ],
+      category: "implicit_communication",
+      explanation: {
+        title: "긍정적 표현 속 부정적 의미 파악",
+        answers: {
+          "A": { score: 2, description: "최악의 선택" },
+          "B": { score: 3, description: "그닥 좋지 않은 선택" },
+          "C": { score: 4, description: "차선" },
+          "D": { score: 5, description: "최선" }
+        },
+        detail: "'매우 독창적' 또는 '참고하겠습니다'라는 표현은 종종 부정적 의미를 함축합니다. 특히 다른 참석자들의 침묵은 중요한 신호입니다. 일본 문화에서는 직접적인 거절을 피하므로, 비공식 채널을 통해 실제 반응을 확인하는 것이 현명합니다."
+      }
+    },
+    {
+      id: "jb6",
+      text: "당신이 속한 팀은 6개월간 진행될 신규 프로젝트의 접근 방식을 논의 중입니다. 팀 내 대다수는 안전하고 검증된 방법을 선호하고 있지만, 당신은 혁신적인 새로운 방법이 훨씬 효과적이라고 확신합니다. 회의에서 어떻게 행동하겠습니까?",
+      options: [
+        { value: "A", label: "'팀의 의견을 존중하지만, 제가 제안하는 방식이 왜 더 효과적인지 설명하겠습니다'라고 말한 후, 자신의 접근법에 대한 명확한 이점을 데이터와 함께 제시한다." },
+        { value: "B", label: "먼저 팀이 선호하는 방식의 장점을 인정한 후, '기존 방식에 몇 가지 새로운 요소를 추가하면 더욱 효과적일 수 있을 것 같습니다'라고 제안하며 점진적 변화를 모색한다." },
+        { value: "C", label: "회의에서는 다수의 의견에 따르겠다고 동의하고, 이후 프로젝트 진행 과정에서 자신의 아이디어를 부분적으로 적용할 기회를 찾는다." },
+        { value: "D", label: "자신의 아이디어를 회의 전에 팀원들에게 개별적으로 설명하여 지지를 얻은 후, 회의에서 '몇몇 팀원들과 논의해 본 결과...'라고 시작하며 집단적 지지가 있는 것처럼 제안한다." }
+      ],
+      category: "group_harmony",
+      explanation: {
+        title: "집단주의와 조화",
+        answers: {
+          "A": { score: 2, description: "최악의 선택" },
+          "B": { score: 5, description: "최선" },
+          "C": { score: 4, description: "차선" },
+          "D": { score: 3, description: "그닥 좋지 않은 선택" }
+        },
+        detail: "일본 비즈니스 문화에서는 '와(和)' 즉 조화가 중요합니다. 혁신적인 아이디어도 기존 방식에 점진적으로 통합하는 접근법이 더 수용되기 쉽습니다."
+      }
+    },
+    {
+      id: "jb7",
+      text: "당신이 맡은 프로젝트에 대해 일본인 상사가 '이 보고서를 내일까지 완성할 수 있을까요?(このレポートは明日までに完成できますか？)'라고 물었습니다. 당신은 현재 다른 긴급한 업무도 있어 사실상 어렵다고 생각합니다. 어떻게 대응하겠습니까?",
+      options: [
+        { value: "A", label: "'죄송합니다만, 현재 진행 중인 긴급 업무가 있어 내일까지는 어렵습니다. 목요일까지 제출해도 될까요?'라고 직접적으로 답한다." },
+        { value: "B", label: "'최선을 다해 보겠습니다만, 현재 다른 업무도 진행 중이라 일정이 빠듯합니다. 우선순위를 어떻게 조정하면 좋을지 조언 부탁드립니다'라고 대답한다." },
+        { value: "C", label: "이것이 사실상 지시임을 이해하고, 다른 업무를 미루더라도 내일까지 완성하여 제출한다." },
+        { value: "D", label: "'네, 가능합니다'라고 대답한 후, 실제로 완성이 어려우면 내일 지연 사유와 함께 진행 상황을 보고한다." }
+      ],
+      category: "implicit_instruction",
+      explanation: {
+        title: "질문 형태의 지시나 요청 이해",
+        answers: {
+          "A": { score: 2, description: "최악의 선택" },
+          "B": { score: 5, description: "최선" },
+          "C": { score: 4, description: "차선" },
+          "D": { score: 3, description: "그닥 좋지 않은 선택" }
+        },
+        detail: "일본 비즈니스 문화에서 상사의 '할 수 있을까요?'라는 질문은 실제로는 지시인 경우가 많습니다. 그러나 실제로 불가능한 경우, 직접적인 거절보다는 상황을 설명하고 조언을 구하는 방식이 관계를 유지하면서도 현실적인 해결책을 찾는 방법입니다."
+      }
+    },
+    {
+      id: "jb8",
+      text: "당신의 팀은 다음 주 금요일까지 중요한 프로젝트를 완료해야 합니다. 목요일 저녁, 아직 많은 작업이 남아있어 팀장이 모두에게 금요일 밤과 필요하다면 주말까지 연장 근무를 해야 할 수도 있다고 알렸습니다. 그런데 당신은 오래 전부터 계획된 가족 행사가 토요일에 있습니다. 어떻게 대응하겠습니까?",
+      options: [
+        { value: "A", label: "금요일 밤까지는 최대한 일하되, 토요일 가족 행사는 참석해야 한다고 미리 팀장에게 알리고, 일요일에 다시 와서 작업을 계속하겠다고 제안한다." },
+        { value: "B", label: "가족 행사를 취소하고 팀과 함께 주말까지 근무하여 프로젝트를 완료한다. 가족에게는 업무 상황을 설명하고 이해를 구한다." },
+        { value: "C", label: "목요일과 금요일에 가능한 한 많은 작업을 처리하고, 토요일 가족 행사에는 짧게 참석한 후 다시 사무실로 복귀하여 나머지 작업을 완료한다." },
+        { value: "D", label: "팀장에게 가족 행사가 중요하다고 설명하고, 개인적으로 목요일 밤과 금요일에 추가 시간을 투자하여 자신의 담당 부분을 완료하겠다고 제안한다." }
+      ],
+      category: "loyalty",
+      explanation: {
+        title: "충성도와 소속감",
+        answers: {
+          "A": { score: 3, description: "그닥 좋지 않은 선택" },
+          "B": { score: 2, description: "최악의 선택" },
+          "C": { score: 4, description: "차선" },
+          "D": { score: 5, description: "최선" }
+        },
+        detail: "일본 기업문화에서는 팀에 대한 헌신이 중요하지만, 개인의 희생만을 요구하지는 않습니다. 중요한 것은 팀의 목표 달성에 자신이 기여하려는 의지를 보여주는 것입니다. 효과적인 타협안을 제시하는 것이 가장 바람직합니다."
+      }
+    },
+    {
+      id: "jb9",
+      text: "당신이 근무하는 일본 회사에서 새로운 시장에 진출하는 계획을 논의 중입니다. 이 시장은 잠재력이 크지만 위험도 상당합니다. 초기 회의에서 여러 의견이 나왔고, 이제 당신의 의견을 물어봅니다. 어떻게 대응하겠습니까?",
+      options: [
+        { value: "A", label: "경쟁사의 성공 사례와 실패 사례를 상세히 분석하고, 단계적 접근법과 각 단계별 리스크 관리 방안을 구체적으로 제시한다." },
+        { value: "B", label: "이 시장의 잠재력과 혁신적인 진입 전략을 강조하며, 빠른 결정과 과감한 투자가 경쟁 우위를 가져올 수 있다고 주장한다." },
+        { value: "C", label: "회사의 기존 강점과 일치하는 안전한 부분부터 시작하여 점진적으로 확장해 나가는 보수적 접근법을 지지한다." },
+        { value: "D", label: "다른 임원들의 의견을 참고하여 대체로 지지를 받는 방향으로 자신의 의견을 조정하여 발표한다." }
+      ],
+      category: "uncertainty_avoidance",
+      explanation: {
+        title: "불확실성 회피",
+        answers: {
+          "A": { score: 5, description: "최선" },
+          "B": { score: 2, description: "최악의 선택" },
+          "C": { score: 4, description: "차선" },
+          "D": { score: 3, description: "그닥 좋지 않은 선택" }
+        },
+        detail: "일본 기업은 불확실성을 회피하는 경향이 있습니다. 철저한 사례 분석과 리스크 관리 방안을 제시하는 것이 가장 효과적이며, 급진적 변화보다는 점진적 접근을 선호합니다."
+      }
+    },
+    {
+      id: "jb10",
+      text: "당신은 일본 대기업의 국제부서에서 유일한 외국인 관리자로 일하고 있습니다. 6개월이 지났지만 여전히 중요한 의사결정 과정에서 배제되는 느낌이 들고, 일본인 동료들은 당신 앞에서도 종종 일본어로 대화하여 소외감을 줍니다. 어떻게 대응하겠습니까?",
+      options: [
+        { value: "A", label: "상사와의 1:1 면담을 요청하여 현 상황에 대한 우려를 전문적으로 표현하고, 팀에 더 효과적으로 기여하기 위한 방법을 논의한다." },
+        { value: "B", label: "동료들과의 관계 형성에 더 많은 노력을 기울이며, 점심 시간이나 회식에 적극 참여하고, 일본어 학습에 더 투자하면서 점진적 변화를 기대한다." },
+        { value: "C", label: "국제부서임에도 이런 분위기가 지속된다면 불공정하다고 판단하고, 인사부에 공식적으로 이의를 제기하거나 타 부서로의 이동을 요청한다." },
+        { value: "D", label: "문화적 차이를 인정하고, 일본식 업무 방식에 자신을 완전히 적응시키기 위해 노력하면서, 의사결정 과정에는 참여하지 못하더라도 주어진 역할에 집중한다." }
+      ],
+      category: "insider_outsider",
+      explanation: {
+        title: "외부인과 내부인의 구분",
+        answers: {
+          "A": { score: 4, description: "차선" },
+          "B": { score: 5, description: "최선" },
+          "C": { score: 2, description: "최악의 선택" },
+          "D": { score: 3, description: "그닥 좋지 않은 선택" }
+        },
+        detail: "일본 사회에서 외부인으로서 인정받기 위해서는 장기적인 관계 구축과 문화적 적응 노력이 필요합니다. 공식적 이의 제기보다는 개인적 노력과 점진적 접근이 더 효과적입니다."
+      }
+    }
+  ],
+  interpretation: {
+    scores: [
+      { min: 41, max: 50, level: "일본진출 준비 완료", description: "일본 비즈니스 문화에 대한 뛰어난 이해도를 보여줍니다. 미묘한 문화적 차이와 비즈니스 관행에 능숙하게 대응할 수 있습니다." },
+      { min: 31, max: 40, level: "고지가 눈앞에", description: "일본 비즈니스 문화의 여러 측면을 잘 이해하고 있으며, 대부분의 상황에서 적절히 대응할 수 있습니다. 더 깊은 문화적 뉘앙스를 파악하는 데 집중하면 좋겠습니다." },
+      { min: 21, max: 30, level: "아직 갈 길이 멀지만", description: "일본 비즈니스 문화의 기본 개념은 이해하고 있지만, 복잡한 상황에서 적절히 대응하는 능력을 발전시켜야 합니다." },
+      { min: 0, max: 20, level: "천리길도 한 걸음부터", description: "일본 비즈니스 문화에 대한 이해가 초기 단계입니다. 기본적인 비즈니스 예절과 문화적 차이에 대한 학습이 필요합니다." }
+    ]
+  }
+};
+
+// 일본어 수준 검사 데이터
+const JAPAN_LANGUAGE_TEST = {
+  introduction: "일본어 능력 검사",
+  guidance: [
+    "각 문항은 일본어 비즈니스 용어나 표현에 관한 질문입니다.",
+    "제시된 용어에 대한 가장 적절한 일본어 설명을 골라주세요.",
+    "결과는 일본어 능력과 비즈니스 일본어에 대한 이해도를 평가하는 데 사용됩니다."
+  ],
+  questions: [
+    {
+      id: "jl1",
+      text: "「定例会」とは、業務上どのような性質の会合を指すか？",
+      options: [
+        { value: "A", label: "毎週または毎月といった定期的なスケジュールに基づき開催される会議" },
+        { value: "B", label: "緊急事態の際に臨時召集される会議" },
+        { value: "C", label: "経営陣のみで秘密裏に行われる会合" },
+        { value: "D", label: "自由形式で出席者が自由に意見を交わす非公式ミーティング" }
+      ],
+      correctAnswer: "A",
+      explanation: "「定例会」とは、組織内で定められたスケジュールに従い、定期的に開催される会議であり、業務の進捗報告や問題解決のための情報共有が目的."
+    },
+    {
+      id: "jl2",
+      text: "「根回し」の意味として最も適切なものはどれか？",
+      options: [
+        { value: "A", label: "決定事項を上層部に正式に報告する行為" },
+        { value: "B", label: "非公式な場で事前に関係者と意見交換し、合意形成を図るプロセス" },
+        { value: "C", label: "会議終了後に決定事項を関係各所へ一方的に伝達する方法" },
+        { value: "D", label: "定例会で話し合われた内容を議事録としてまとめること" }
+      ],
+      correctAnswer: "B",
+      explanation: "「根回し」は、正式な決定前に非公式な話し合いや相談を通じ、関係者間でお互いの意向や情報を調整して合意形成を促す重要なプロセスを意味するよ."
+    },
+    {
+      id: "jl3",
+      text: "「議事録」とは、どのような内容や役割を持つ記録か？",
+      options: [
+        { value: "A", label: "会議や打ち合わせの内容、決定事項、議論の過程を文書化した記録" },
+        { value: "B", label: "会議の開始前に配布する、議題やアジェンダのリスト" },
+        { value: "C", label: "会議中に発表されたプレゼンテーション資料のコピー" },
+        { value: "D", label: "会議後に外部の関係者向けに作成される経営報告書" }
+      ],
+      correctAnswer: "A",
+      explanation: "「議事録」は、会議での発言内容や決定事項、討議の流れを正確に記録し、後日確認やフォローアップに利用するための文書記録を意味する。"
+    },
+    {
+      id: "jl4",
+      text: "「ほれんそう」とは何を略した言葉であり、その重要性は何か？",
+      options: [
+        { value: "A", label: "個々の業務に対する自主的な自己管理" },
+        { value: "B", label: "報告・連絡・相談の三拍子で、効率的な業務遂行と円滑なコミュニケーションを支える基本原則" },
+        { value: "C", label: "上司と部下との定期的な1対1ミーティング" },
+        { value: "D", label: "電子メールを用いた業務連絡のみに限定された手法" }
+      ],
+      correctAnswer: "B",
+      explanation: "「ほれんそう」は、報告、連絡、相談の略であり、組織内での情報共有と問題解決、リスク管理の基本として極めて重要なコミュニケーション手法を示す言葉。"
+    },
+    {
+      id: "jl5",
+      text: "「認識合わせ」のプロセスとして最も適切な説明はどれか？",
+      options: [
+        { value: "A", label: "決定事項が一方的に伝達され、受け手がそのまま実行する状態" },
+        { value: "B", label: "複数の関係者間で意見や理解をすり合わせ、共通の認識を持つよう調整すること" },
+        { value: "C", label: "既存の計画や意見を変更せず、そのまま維持する意思表示" },
+        { value: "D", label: "会議前に個々の目標や役割を別々に確認するだけの手法" }
+      ],
+      correctAnswer: "B",
+      explanation: "「認識合わせ」は、関係者全体が同じ情報や状況理解を共有するためのプロセスで、誤解やズレを防ぎ、効果的な協働を実現するために欠かせない取り組みだよ。"
+    },
+    {
+      id: "jl6",
+      text: "「稟議」とは、主に社内においてどのようなプロセスを指すか？",
+      options: [
+        { value: "A", label: "社員全員に自由意見を求める会議の開催" },
+        { value: "B", label: "提案や決裁事項を文書で回覧し、複数の責任者の承認を得るプロセス" },
+        { value: "C", label: "日々の業務報告のための定例会の実施" },
+        { value: "D", label: "プロジェクト終了後の反省会の記録作成" }
+      ],
+      correctAnswer: "B",
+      explanation: "「稟議」は、会社内で提案や決裁事項を回覧し、関係部署や上司の承認を段階的に得る意思決定プロセスのことを指す。"
+    },
+    {
+      id: "jl7",
+      text: "「決裁」とは、企業内においてどのような行為を意味するか？",
+      options: [
+        { value: "A", label: "複数の部署で情報を共有すること" },
+        { value: "B", label: "上層部が最終的な権限で文書や提案の承認を行うこと" },
+        { value: "C", label: "同僚間で自由に意見を交換する会議を開くこと" },
+        { value: "D", label: "社内イベントの開催を担当する業務" }
+      ],
+      correctAnswer: "B",
+      explanation: "「決裁」は、上司や経営陣が最終的な判断権をもって提案や文書の内容を正式に承認するプロセスを意味する。"
+    },
+    {
+      id: "jl8",
+      text: "「商談」とは、どのようなビジネスの状況を指すか？",
+      options: [
+        { value: "A", label: "社内スタッフ間のカジュアルな意見交換" },
+        { value: "B", label: "企業間で正式な条件交渉を目的として行われる会議" },
+        { value: "C", label: "定例の進捗報告会の一部として行われる短い打合せ" },
+        { value: "D", label: "経営方針を発表するための社内プレゼンテーション" }
+      ],
+      correctAnswer: "B",
+      explanation: "「商談」は、企業同士が取引条件や契約内容などを正式に交渉するための会合を意味し,これにより両社間の商取引が成立するための基盤を整えるプロセスとなる。"
+    },
+    {
+      id: "jl9",
+      text: "「リスク管理」とは、企業活動においてどのようなプロセスを指すか？",
+      options: [
+        { value: "A", label: "企業の予算配分を最適化するための計画策定" },
+        { value: "B", label: "企業が直面する可能性のある問題や危険を事前に特定し、対策を講じる活動" },
+        { value: "C", label: "新製品の市場投入に際してのプロモーション戦略の実施" },
+        { value: "D", label: "業務プロセスの効率化のために外部委託を積極的に進める手法" }
+      ],
+      correctAnswer: "B",
+      explanation: "「リスク管理」は、企業が業務を進める上で発生し得る不確定要素や潜在的なリスクを事前に把握・評価し、その影響を最小限に抑えるための対策を計画・実行するプロセスを意味する。"
+    },
+    {
+      id: "jl10",
+      text: "「コンプライアンス」とは、企業活動においてどのような意味を持つか？",
+      options: [
+        { value: "A", label: "社内のイノベーション促進や新規事業開発の推進" },
+        { value: "B", label: "企業が法令、倫理、内部規定などを遵守し、社会的な信頼を維持するための取り組み" },
+        { value: "C", label: "部署間の情報共有を促進するための定例ミーティング" },
+        { value: "D", label: "業務プロセスの改善を目的とした外部コンサルタントの起用" }
+      ],
+      correctAnswer: "B",
+      explanation: "「コンプライアンス」は、企業が業務を遂行する上で関係法令や社内規定、社会倫理などを遵守し、透明性と信頼性の高い経営を実現するための基本的な考え方と実践体制を 意味する。"
+    }
+  ],
+  interpretation: {
+    scores: [
+      { min: 0, max: 3, level: "초급 수준", description: "비즈니스 일본어의 기본 용어에 익숙해지는 단계입니다. 기초적인 비즈니스 회화와 자주 사용되는 표현을 학습하는 것이 도움이 될 것입니다." },
+      { min: 4, max: 6, level: "중급 수준", description: "비즈니스 일본어의 주요 개념과 표현을 이해하고 있습니다. 업계별 전문 용어와 좀 더 복잡한 표현을 학습하면 실무에서의 의사소통이 더욱 원활해질 것입니다." },
+      { min: 7, max: 8, level: "중상급 수준", description: "비즈니스 일본어에 대한 이해도가 높습니다. 대부분의 비즈니스 상황에서 효과적으로 의사소통할 수 있으며, 더 미묘한 표현과 업계별 전문 용어를 학습하면 좋겠습니다." },
+      { min: 9, max: 10, level: "고급 수준", description: "비즈니스 일본어에 매우 능숙합니다. 다양한 비즈니스 상황에서 자신감 있게 의사소통할 수 있으며, 전문적인 문맥에서도 일본어를 효과적으로 사용할 수 있습니다." }
+    ]
+  }
+};
+
+// 일본취업 적합 업종 테스트 문항
+// ... existing code ...
+
 function App() {
   const [appState, setAppState] = useState(APP_STATES.HOME);
   const [currentStep, setCurrentStep] = useState(0);
@@ -545,8 +897,14 @@ function App() {
     <header className="header">
       <button className="logo" onClick={() => setAppState(APP_STATES.HOME)}>entry.ai</button>
       <div className="header-right">
-        <button className="header-button">❤️ 이용중인</button>
-        <button className="header-button">🔄 랜덤선택</button>
+        <a 
+          href="#" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="header-button"
+        >
+          ❤️ Who made this?
+        </a>
       </div>
     </header>
   );
@@ -560,6 +918,7 @@ function App() {
             key={card.id} 
             className="test-card" 
             onClick={() => {
+              setCurrentTest(card.id);
               setAppState(APP_STATES.START);
             }}
           >
@@ -577,10 +936,17 @@ function App() {
       
       <div className="iq-test-section">
         <div className="iq-test-content">
-          <h2>IQ 검사</h2>
-          <p>대한민국의 평균 IQ는 106입니다. IQ 검사를 받으시고 자신의 IQ가 평균보다 높은지 확인하세요.</p>
+          <h2>entry.ai 엔트리시트 메이커</h2>
+          <p>5분만에 만들어보는 업계/직종별 맞춤형 엔트리시트</p>
         </div>
-        <button className="iq-test-button">›</button>
+        <a 
+          href="https://chatgpt.com/g/g-67e6593863c8819182fe301338057534-entry-ai-enteurisiteu-meikeo" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="iq-test-button"
+        >
+          ›
+        </a>
       </div>
     </div>
   );
@@ -588,19 +954,82 @@ function App() {
   // 시작 페이지
   const renderStartPage = () => (
     <div className="start-page">
-      <h1>entry.ai 직업 적성 검사</h1>
-      <p>당신의 성향과 특성을 분석하여 최적의 직업군을 알려드립니다. 설문 응답은 귀하의 적성을 분석하는 데 사용됩니다.</p>
-      <button onClick={startSurvey}>시작하기</button>
+      <h1>
+        {currentTest === 'mbti_test' ? 
+          '일본 비즈니스 문화 적응력 진단 평가' : 
+          currentTest === 'japan_life_test' ?
+          '일본어 능력 검사' :
+          '일본취업 업종 적합도 검사'}
+      </h1>
+      
+      {currentTest === 'mbti_test' ? (
+        <div className="test-instructions">
+          <p>다양한 비즈니스 상황에서의 당신의 적응력과 적합도를 평가합니다.</p>
+          <ul>
+            {JAPAN_BUSINESS_TEST.guidance.map((instruction, index) => (
+              <li key={index}>{instruction}</li>
+            ))}
+          </ul>
+          <button onClick={startSurvey}>검사 시작하기</button>
+        </div>
+      ) : currentTest === 'japan_life_test' ? (
+        <div className="test-instructions">
+          <p>일본 사회생활에서 자주 쓰이는 용어로 일본어 실력을 점검해봅니다.</p>
+          <ul>
+            {JAPAN_LANGUAGE_TEST.guidance.map((instruction, index) => (
+              <li key={index}>{instruction}</li>
+            ))}
+          </ul>
+          <button onClick={startSurvey}>검사 시작하기</button>
+        </div>
+      ) : (
+        <>
+          <p>당신의 성향과 특성에 맞는 업계를 추천해드립니다.</p>
+          <button onClick={startSurvey}>시작하기</button>
+        </>
+      )}
     </div>
   );
   
   // 설문조사 페이지
   const renderSurveyPage = () => {
-    // 현재 카테고리의 질문들을 필터링
-    const currentCategoryQuestions = QUESTIONS.filter(q => q.category === CATEGORIES[currentStep].id);
+    // 현재 선택된 테스트에 따라 질문 가져오기
+    let currentQuestions = [];
+    let categoryTitle = '';
+    let categoryIcon = '';
+    
+    if (currentTest === 'mbti_test') {
+      // 일본 비즈니스 적응력 검사인 경우
+      currentQuestions = JAPAN_BUSINESS_TEST.questions;
+      if (currentStep < currentQuestions.length) {
+        const question = currentQuestions[currentStep];
+        categoryTitle = question.category === 'hierarchy' ? '계층 구조와 연공서열' : 
+                       question.category === 'decision_making' ? '의사결정 프로세스' :
+                       question.category === 'communication' ? '독특한 커뮤니케이션 방식' :
+                       question.category === 'relationship' ? '관계 중심 비즈니스' :
+                       question.category === 'implicit_communication' ? '긍정적 표현 속 부정적 의미 파악' :
+                       question.category === 'group_harmony' ? '집단주의와 조화' :
+                       question.category === 'implicit_instruction' ? '질문 형태의 지시나 요청 이해' :
+                       question.category === 'loyalty' ? '충성도와 소속감' :
+                       question.category === 'uncertainty_avoidance' ? '불확실성 회피' :
+                       question.category === 'insider_outsider' ? '외부인과 내부인의 구분' :
+                       '일본 비즈니스 문화';
+        categoryIcon = '🇯🇵';
+      }
+    } else if (currentTest === 'japan_life_test') {
+      // 일본어 수준 검사인 경우
+      currentQuestions = JAPAN_LANGUAGE_TEST.questions;
+      categoryTitle = '일본어 비즈니스 용어';
+      categoryIcon = '📝';
+    } else {
+      // 기본 적성 검사인 경우
+      currentQuestions = QUESTIONS.filter(q => q.category === CATEGORIES[currentStep].id);
+      categoryTitle = CATEGORIES[currentStep].name;
+      categoryIcon = CATEGORIES[currentStep].icon;
+    }
     
     // 현재 질문이 없는 경우 처리
-    if (currentCategoryQuestions.length === 0) {
+    if (currentQuestions.length === 0) {
       return (
         <div className="survey-page">
           <h2>질문이 없습니다</h2>
@@ -613,81 +1042,359 @@ function App() {
       );
     }
     
-    return (
-      <div className="survey-page">
-        <h2>{CATEGORIES[currentStep].icon} {CATEGORIES[currentStep].name}</h2>
-        <div className="questions">
-          {currentCategoryQuestions.map(question => (
-            <div key={question.id} className="question">
-              <p>{question.text}</p>
+    // 일본 비즈니스 적응력 검사와 기본 적성 검사에 따라 다른 UI 렌더링
+    if (currentTest === 'mbti_test') {
+      const currentQuestion = currentQuestions[currentStep];
+      
+      return (
+        <div className="survey-page japan-business-test">
+          <div className="questions">
+            <div className="question">
+              <p className="question-number">문제 {currentStep + 1}/{currentQuestions.length}</p>
+              <p className="question-text">{currentQuestion.text}</p>
               
-              {question.type === 'likert' ? (
-                <div className="likert-scale">
-                  {[1, 2, 3, 4, 5].map(value => (
-                    <button 
-                      key={value} 
-                      onClick={() => handleAnswer(question.id, value)}
-                      className={answers[question.id] === value ? 'selected' : ''}
-                    >
-                      {value}
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <div className="choice-options">
-                  {question.options.map((option) => (
-                    <button 
-                      key={option.value}
-                      onClick={() => handleAnswer(question.id, option.value)}
-                      className={answers[question.id] === option.value ? 'selected' : ''}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className="choice-options">
+                {currentQuestion.options.map((option) => (
+                  <button 
+                    key={option.value}
+                    onClick={() => handleAnswer(currentQuestion.id, option.value)}
+                    className={answers[currentQuestion.id] === option.value ? 'selected' : ''}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          ))}
+          </div>
+          
+          <div className="navigation">
+            <button 
+              disabled={currentStep === 0} 
+              onClick={() => {
+                if (currentStep > 0) {
+                  setCurrentStep(currentStep - 1);
+                }
+              }}
+            >
+              이전
+            </button>
+            <button 
+              onClick={() => {
+                if (answers[currentQuestion.id]) {
+                  if (currentStep < currentQuestions.length - 1) {
+                    setCurrentStep(currentStep + 1);
+                  } else {
+                    setAppState(APP_STATES.RESULTS);
+                  }
+                } else {
+                  alert('답변을 선택해주세요.');
+                }
+              }}
+            >
+              {currentStep < currentQuestions.length - 1 ? '다음' : '결과 보기'}
+            </button>
+          </div>
         </div>
-        
-        <div className="navigation">
-          <button 
-            disabled={currentStep === 0} 
-            onClick={() => {
-              if (currentStep > 0) {
-                setCurrentStep(currentStep - 1);
-              }
-            }}
-          >
-            이전
-          </button>
-          <button 
-            disabled={currentCategoryQuestions.some(q => !answers[q.id])}
-            onClick={() => {
-              // 현재 카테고리의 모든 질문에 답변했는지 확인
-              const allAnswered = currentCategoryQuestions.every(q => answers[q.id]);
+      );
+    } else if (currentTest === 'japan_life_test') {
+      // 일본어 수준 검사 UI
+      const currentQuestion = currentQuestions[currentStep];
+      
+      return (
+        <div className="survey-page japan-language-test">
+          <h2>{categoryIcon} {categoryTitle}</h2>
+          <div className="questions">
+            <div className="question">
+              <p className="question-number">문제 {currentStep + 1}/{currentQuestions.length}</p>
+              <p className="question-text">{currentQuestion.text}</p>
               
-              if (!allAnswered) {
-                alert('모든 질문에 답변해주세요.');
-                return;
-              }
-              
-              if (currentStep < CATEGORIES.length - 1) {
-                setCurrentStep(currentStep + 1);
-              } else {
-                setAppState(APP_STATES.RESULTS);
-              }
-            }}
-          >
-            {currentStep < CATEGORIES.length - 1 ? '다음' : '결과 보기'}
-          </button>
+              <div className="choice-options">
+                {currentQuestion.options.map((option) => (
+                  <button 
+                    key={option.value}
+                    onClick={() => handleAnswer(currentQuestion.id, option.value)}
+                    className={answers[currentQuestion.id] === option.value ? 'selected' : ''}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div className="navigation">
+            <button 
+              disabled={currentStep === 0} 
+              onClick={() => {
+                if (currentStep > 0) {
+                  setCurrentStep(currentStep - 1);
+                }
+              }}
+            >
+              이전
+            </button>
+            <button 
+              onClick={() => {
+                if (answers[currentQuestion.id]) {
+                  if (currentStep < currentQuestions.length - 1) {
+                    setCurrentStep(currentStep + 1);
+                  } else {
+                    setAppState(APP_STATES.RESULTS);
+                  }
+                } else {
+                  alert('답변을 선택해주세요.');
+                }
+              }}
+            >
+              {currentStep < currentQuestions.length - 1 ? '다음' : '결과 보기'}
+            </button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      // 기존 직업 적성 검사 UI
+      return (
+        <div className="survey-page">
+          <h2>{categoryIcon} {categoryTitle}</h2>
+          <div className="questions">
+            {currentQuestions.map(question => (
+              <div key={question.id} className="question">
+                <p>{question.text}</p>
+                
+                {question.type === 'likert' ? (
+                  <div className="likert-scale">
+                    {[1, 2, 3, 4, 5].map(value => (
+                      <button 
+                        key={value} 
+                        onClick={() => handleAnswer(question.id, value)}
+                        className={answers[question.id] === value ? 'selected' : ''}
+                      >
+                        {value}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="choice-options">
+                    {question.options.map((option) => (
+                      <button 
+                        key={option.value}
+                        onClick={() => handleAnswer(question.id, option.value)}
+                        className={answers[question.id] === option.value ? 'selected' : ''}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          
+          <div className="navigation">
+            <button 
+              disabled={currentStep === 0} 
+              onClick={() => {
+                if (currentStep > 0) {
+                  setCurrentStep(currentStep - 1);
+                }
+              }}
+            >
+              이전
+            </button>
+            <button 
+              disabled={currentQuestions.some(q => !answers[q.id])}
+              onClick={() => {
+                // 현재 카테고리의 모든 질문에 답변했는지 확인
+                const allAnswered = currentQuestions.every(q => answers[q.id]);
+                
+                if (!allAnswered) {
+                  alert('모든 질문에 답변해주세요.');
+                  return;
+                }
+                
+                if (currentStep < CATEGORIES.length - 1) {
+                  setCurrentStep(currentStep + 1);
+                } else {
+                  setAppState(APP_STATES.RESULTS);
+                }
+              }}
+            >
+              {currentStep < CATEGORIES.length - 1 ? '다음' : '결과 보기'}
+            </button>
+          </div>
+        </div>
+      );
+    }
   };
   
   // 결과 페이지
   const renderResultsPage = () => {
+    // 일본 비즈니스 적응력 검사 결과
+    if (currentTest === 'mbti_test') {
+      // 점수 계산
+      let totalScore = 0;
+      const detailScores = {};
+      
+      JAPAN_BUSINESS_TEST.questions.forEach(question => {
+        if (answers[question.id]) {
+          const score = question.explanation.answers[answers[question.id]].score;
+          totalScore += score;
+          detailScores[question.category] = (detailScores[question.category] || 0) + score;
+        }
+      });
+      
+      // 점수 범위에 따른 결과 판정
+      const result = JAPAN_BUSINESS_TEST.interpretation.scores.find(
+        range => totalScore >= range.min && totalScore <= range.max
+      );
+      
+      // 카테고리별 점수 데이터 (레이더 차트용)
+      const categories = [...new Set(JAPAN_BUSINESS_TEST.questions.map(q => q.category))];
+      const categoryLabels = {
+        'hierarchy': '계층 구조',
+        'decision_making': '의사결정',
+        'communication': '커뮤니케이션',
+        'relationship': '관계 중심',
+        'implicit_communication': '암묵적 소통',
+        'group_harmony': '집단 조화',
+        'implicit_instruction': '간접 지시',
+        'loyalty': '소속감',
+        'uncertainty_avoidance': '불확실성 회피',
+        'insider_outsider': '내부인/외부인'
+      };
+      
+      const categoryScores = categories.map(category => {
+        const questions = JAPAN_BUSINESS_TEST.questions.filter(q => q.category === category);
+        const maxScore = questions.length * 5; // 각 질문당 최대 5점
+        const score = detailScores[category] || 0;
+        return {
+          subject: categoryLabels[category] || category,
+          A: (score / maxScore) * 100, // 100점 만점으로 변환
+          fullMark: 100
+        };
+      });
+      
+      return (
+        <div className="results-page">
+          <h2>일본 비즈니스 적응력 진단 결과</h2>
+          
+          <div className="result-summary">
+            <div className="result-score">
+              <h3>당신의 점수</h3>
+              <div className="score-circle">
+                <span>{totalScore}점</span>
+              </div>
+              <h3 className="result-label">{result?.level}</h3>
+            </div>
+            
+            <div className="result-description">
+              <p>{result?.description}</p>
+            </div>
+          </div>
+          
+          <div className="result-details">
+            <h3>영역별 점수</h3>
+            <div className="chart-container">
+              <ResponsiveContainer width="100%" height={400}>
+                <RadarChart data={categoryScores}>
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="subject" />
+                  <PolarRadiusAxis domain={[0, 100]} />
+                  <Radar name="적응력 점수" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          
+          <div className="navigation">
+            <button onClick={() => {
+              setAppState(APP_STATES.HOME);
+              setCurrentStep(0);
+              setAnswers({});
+              setCurrentTest(null);
+            }}>
+              홈으로 돌아가기
+            </button>
+          </div>
+        </div>
+      );
+    }
+    
+    // 일본어 수준 검사 결과
+    if (currentTest === 'japan_life_test') {
+      // 정답 개수 계산
+      let correctCount = 0;
+      let wrongAnswers = [];
+      
+      JAPAN_LANGUAGE_TEST.questions.forEach(question => {
+        if (answers[question.id]) {
+          if (answers[question.id] === question.correctAnswer) {
+            correctCount++;
+          } else {
+            wrongAnswers.push({
+              question: question.text,
+              userAnswer: question.options.find(opt => opt.value === answers[question.id])?.label,
+              correctAnswer: question.options.find(opt => opt.value === question.correctAnswer)?.label,
+              explanation: question.explanation
+            });
+          }
+        }
+      });
+      
+      // 점수 범위에 따른 결과 판정
+      const result = JAPAN_LANGUAGE_TEST.interpretation.scores.find(
+        range => correctCount >= range.min && correctCount <= range.max
+      );
+      
+      return (
+        <div className="results-page">
+          <h2>일본어 능력 검사 결과</h2>
+          
+          <div className="result-summary">
+            <div className="result-score">
+              <h3>당신의 점수</h3>
+              <div className="score-circle">
+                <span>{correctCount}/10</span>
+              </div>
+              <h3 className="result-label">{result?.level}</h3>
+            </div>
+            
+            <div className="result-description">
+              <p>{result?.description}</p>
+            </div>
+          </div>
+          
+          {wrongAnswers.length > 0 && (
+            <div className="result-details">
+              <h3>오답 노트</h3>
+              <div className="wrong-answers">
+                {wrongAnswers.map((item, index) => (
+                  <div key={index} className="wrong-answer-item">
+                    <p className="question"><strong>문제:</strong> {item.question}</p>
+                    <p className="user-answer"><strong>내 답변:</strong> {item.userAnswer}</p>
+                    <p className="correct-answer"><strong>정답:</strong> {item.correctAnswer}</p>
+                    <p className="explanation"><strong>해설:</strong> {item.explanation}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          <div className="navigation">
+            <button onClick={() => {
+              setAppState(APP_STATES.HOME);
+              setCurrentStep(0);
+              setAnswers({});
+              setCurrentTest(null);
+            }}>
+              홈으로 돌아가기
+            </button>
+          </div>
+        </div>
+      );
+    }
+    
+    // 기존 산업 적합도 검사 결과
     const industryScores = calculateIndustryFit();
     
     // 점수를 기반으로 정렬된 산업 데이터 생성
@@ -1076,10 +1783,10 @@ function App() {
         ]
       },
       '국제적 감각이 있고 협상에 능한': {
-        interpretation: '글로벌 비즈니스 환경을 이해하고 다양한 문화적 배경을 가진 사람들과 효과적으로 협상할 수 있는 능력이 있습니다.',
+        interpretation: '다양한 배경을 가진 사람들과 국제적인 환경에서 원활히 소통하고 협상하는 능력이 있습니다. 이는 글로벌 프로젝트 및 국제 비즈니스에 중요한 자질입니다.',
         appealPoints: [
-          '국제적인 협상에서 성공적인 결과를.이끌어낸 경험을 강조하세요.',
-          '다양한 문화적 배경을 가진 이해관계자들과 효과적으로 소통하고 타협점을 찾은 사례를 설명하세요.'
+          '국제적인 프로젝트/팀에서 성공적으로 조정했던 경험을 강조하세요.',
+          '다양한 문화적 배경을 가진 사람들과 효과적으로 소통한 사례를 준비하세요.'
         ]
       },
       '디지털에 정통하고 트렌드를 선도하는': {
@@ -1292,18 +1999,18 @@ function App() {
           '다양한 문화권의 사람들과 효과적으로 소통하고 협력한 사례를 설명하세요.'
         ]
       },
-      '국제적 감각이 있고 협상에 능한': {
-        interpretation: '글로벌 비즈니스 환경을 이해하고 다양한 문화적 배경을 가진 사람들과 효과적으로 협상할 수 있는 능력이 있습니다.',
+      '국제적 감각이 있고 협상에 능한_1': {
+        interpretation: '다양한 배경을 가진 사람들과 국제적인 환경에서 원활히 소통하고 협상하는 능력이 있습니다. 이는 글로벌 프로젝트 및 국제 비즈니스에 중요한 자질입니다.',
         appealPoints: [
-          '국제적인 협상에서 성공적인 결과를.이끌어낸 경험을 강조하세요.',
-          '다양한 문화적 배경을 가진 이해관계자들과 효과적으로 소통하고 타협점을 찾은 사례를 설명하세요.'
+          '국제적인 프로젝트/팀에서 성공적으로 조정했던 경험을 강조하세요.',
+          '다양한 문화적 배경을 가진 사람들과 효과적으로 소통한 사례를 준비하세요.'
         ]
       },
-      '체계적이고 효율적인': {
-        interpretation: '업무를 체계적으로 구조화하고 최적의 방식으로 효율적으로 처리하는 능력이 있습니다.',
+      '체계적이고 효율적인_1': {
+        interpretation: '시스템적으로 업무를 접근하고 효율성을 극대화하는 능력이 있습니다. 이는 업무 프로세스 개선과 논리적인 업무 처리에 이상적입니다.',
         appealPoints: [
-          '복잡한 프로세스를 체계적으로 정리하여 효율성을 높인 경험을 강조하세요.',
-          '업무를 구조화하고 시스템화하여 시간과 자원을 절약한 사례를 설명하세요.'
+          '업무 프로세스를 최적화하거나 효율성을 개선한 사례를 구체적으로, 결과 중심적으로 설명하세요.',
+          '체계적인 분석을 통해 문제를 해결했던 경험을 강조하세요.'
         ]
       }
     };
