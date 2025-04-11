@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import './App.css';
 
 // 앱 상태 관리를 위한 상수
@@ -2111,6 +2112,7 @@ function App() {
       {appState === APP_STATES.START && renderStartPage()}
       {appState === APP_STATES.SURVEY && renderSurveyPage()}
       {appState === APP_STATES.RESULTS && renderResultsPage()}
+      <SpeedInsights />
     </div>
   );
 }
